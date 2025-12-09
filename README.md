@@ -1,6 +1,6 @@
 ![MSG Logo](./client/public/image.png)
 
-# WhaTele Chat 🚀
+# MSG 🚀
 
 **Fast like Telegram, Simple like WhatsApp**
 
