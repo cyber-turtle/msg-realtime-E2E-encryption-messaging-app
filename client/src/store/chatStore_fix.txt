@@ -1,0 +1,42 @@
+Replace this:
+
+  handleGroupUpdate: (updatedChat) => {
+    set(state => {
+      console.log('📥 Processing group update:', updatedChat._id);
+      
+      // Check if this chat exists in our chats list
+      const chatExists = state.chats.some(c => c._id === updatedChat._id);
+      
+      // Update or add the chat in the list
+      const updatedChats = chatExists
+        ? state.chats.map(c => c._id === updatedChat._id ? updatedChat : c)
+        : [updatedChat, ...state.chats]; // Add new chat to the top
+      
+      // Update activeChat if it's the same chat
+      const updatedActiveChat = state.activeChat?._id === updatedChat._id 
+        ? updatedChat 
+        : state.activeChat;
+      
+      return {
+        chats: updatedChats,
+        activeChat: updatedActiveChat
+      };
+    });
+  },
+
+With this:
+
+  handleGroupUpdate: (updatedChat) => {
+    set(state => {
+      console.log('📥 Processing group update:', updatedChat._id);
+      
+      // Only update existing chats, don't add new ones
+      const updatedChats = state.chats.map(c => c._id === updatedChat._id ? updatedChat : c);
+      const updatedActiveChat = state.activeChat?._id === updatedChat._id ? updatedChat : state.activeChat;
+      
+      return {
+        chats: updatedChats,
+        activeChat: updatedActiveChat
+      };
+    });
+  },
