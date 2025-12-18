@@ -55,6 +55,14 @@ app.use(errorHandler);
 
 // MongoDB connection
 const connectDB = async () => {
+  // Debug: Show which environment variables are detected (keys only for security)
+  const availableKeys = Object.keys(process.env).filter(key => key.toUpperCase().includes('MONGO'));
+  if (availableKeys.length > 0) {
+    console.log(` 🔍 Detected MongoDB-related variables: [${availableKeys.join(', ')}]`);
+  } else {
+    console.log(' 🔍 No environment variables containing "MONGO" were detected.');
+  }
+
   const mongoURI = process.env.MONGO_URI || process.env.MONGO_URL;
   
   if (!mongoURI) {
