@@ -55,11 +55,19 @@ app.use(errorHandler);
 
 // MongoDB connection
 const connectDB = async () => {
+  const mongoURI = process.env.MONGO_URI || process.env.MONGO_URL;
+  
+  if (!mongoURI) {
+    console.error('❌ FATAL ERROR: No MongoDB URI found in environment variables.');
+    console.error('Please add MONGO_URI or MONGO_URL to your Railway Project Variables.');
+    process.exit(1);
+  }
+
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(` MongoDB Connected: ${conn.connection.host}`);
+    const conn = await mongoose.connect(mongoURI);
+    console.log(` ✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(` MongoDB connection error: ${error.message}`);
+    console.error(` ❌ MongoDB connection error: ${error.message}`);
     process.exit(1);
   }
 };
