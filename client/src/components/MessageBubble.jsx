@@ -187,7 +187,7 @@ const MessageBubble = ({ msg, user, chatParticipants, onViewMedia, onCancelUploa
     setDownloadProgress(0);
     
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const API_URL = import.meta.env.VITE_API_URL;
       const token = localStorage.getItem('token');
       const publicId = msg.media.publicId || extractPublicId(msg.media.url);
       
@@ -336,7 +336,7 @@ const MessageBubble = ({ msg, user, chatParticipants, onViewMedia, onCancelUploa
         setFileDownloadProgress(0);
         
         try {
-          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+          const API_URL = import.meta.env.VITE_API_URL;
           const token = localStorage.getItem('token');
           const publicId = msg.media.publicId || extractPublicId(msg.media.url);
           

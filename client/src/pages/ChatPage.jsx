@@ -487,7 +487,7 @@ const ChatPage = () => {
 
       // Use XMLHttpRequest for progress tracking
       const token = localStorage.getItem('token');
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const API_URL = import.meta.env.VITE_API_URL;
       const response = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         
