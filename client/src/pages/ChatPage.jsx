@@ -146,18 +146,18 @@ const ChatPage = () => {
       }
 
       // Show browser notification
-      if ('Notification' in window) {
-        if (Notification.permission === 'granted') {
-          new Notification(`Incoming ${callType} call`, {
+      if ('Notification' in window && window.Notification) {
+        if (window.Notification.permission === 'granted') {
+          new window.Notification(`Incoming ${callType} call`, {
             body: `${caller.username} is calling you`,
             icon: caller.profilePicture || '/vite.svg',
             tag: 'incoming-call',
             requireInteraction: true
           });
-        } else if (Notification.permission === 'default') {
-          Notification.requestPermission().then(permission => {
+        } else if (window.Notification.permission === 'default') {
+          window.Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
-              new Notification(`Incoming ${callType} call`, {
+              new window.Notification(`Incoming ${callType} call`, {
                 body: `${caller.username} is calling you`,
                 icon: caller.profilePicture || '/vite.svg',
                 tag: 'incoming-call',

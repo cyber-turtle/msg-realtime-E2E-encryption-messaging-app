@@ -720,10 +720,10 @@ const useChatStore = create((set, get) => ({
         });
         
         // Show browser notification
-        if ('Notification' in window && Notification.permission === 'granted') {
+        if ('Notification' in window && window.Notification && window.Notification.permission === 'granted') {
           const senderName = message.sender.username;
           const chatName = chat.isGroupChat ? chat.chatName : senderName;
-          new Notification(`New message from ${chatName}`, {
+          new window.Notification(`New message from ${chatName}`, {
             body: decryptedText.length > 50 ? decryptedText.substring(0, 50) + '...' : decryptedText,
             icon: '/vite.svg'
           });
@@ -930,10 +930,10 @@ const useChatStore = create((set, get) => ({
       }, 500);
 
       // Show browser notification
-      if ('Notification' in window && Notification.permission === 'granted') {
+      if ('Notification' in window && window.Notification && window.Notification.permission === 'granted') {
         const otherUser = chat.participants.find(p => p._id !== user.id);
         const messageText = decryptedChat.latestMessage?.decryptedText || 'New message';
-        new Notification('New Chat', {
+        new window.Notification('New Chat', {
           body: `${otherUser?.username || 'Someone'}: ${messageText.substring(0, 50)}${messageText.length > 50 ? '...' : ''}`,
           icon: '/vite.svg'
         });
