@@ -4,12 +4,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-// Disable console logs in production
+// Re-enable console logs in production for mobile debugging
 if (import.meta.env.PROD) {
-  console.log = () => {};
-  console.debug = () => {};
-  console.info = () => {};
-  console.warn = () => {};
+  // Add error alert for mobile debugging
+  window.onerror = function(msg, url, line, col, error) {
+    alert(`ERR: ${msg}\nL:${line}\nC:${col}`);
+    return false;
+  };
 }
 
 createRoot(document.getElementById('root')).render(
